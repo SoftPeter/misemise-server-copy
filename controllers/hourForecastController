@@ -1,0 +1,25 @@
+!#/etc/php/7.0/fpm -q
+
+<?php
+include "/var/www/html/api-server/pdos/DatabasePdo.php";
+include "/var/www/html/api-server/pdos/IndexPdo.php";
+// UPDATE
+$pdo = pdoSqlConnect();
+for($i=1; $i<=24; $i++){
+    $randomNum = mt_rand(1,4);
+    $query = "update hour_forecast set current_grade=$randomNum where no = $i;";
+    $st = $pdo->prepare($query);
+    $st->execute([]);
+}
+
+//$cnt = count(fcmToken());
+//$tokens = fcmToken();
+//$t_encode = json_encode($tokens);
+//$t_decode = json_decode($t_encode);
+//for($i=0; $i<=cnt; $i++){
+//    $to = $t_decode[$i]->token;
+//    sendPushMapUpdate($to);
+//}
+//$st = null;
+//$pdo = null;
+?>
